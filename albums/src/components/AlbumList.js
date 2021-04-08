@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { View, Text } from 'react-native';
+import axios from 'axios';
 
 
 // just for testing the key
@@ -8,19 +9,36 @@ const trackList = 'https://api.napster.com/v2.1/tracks/top?';
 
 class AlbumList extends Component {
 
-    state = { albums: [] };
+    constructor(props) {
+        super(props);
+        this.state = ({
+            albums: []
+        })
+    }
 
     UNSAFE_componentWillMount() {
-        fetch(trackList + apikey)
-            .then((response) => response.json())
-            .then((responseData) => this.setState({ albums: responseData }));
+        axios.get(trackList + apikey)
+            .then((response) => this.setState({ albums: response.data }));
 
     }
+
+    renderAlbums() {
+
+        return (
+
+            this.state.albums.map(album =>
+                <Text key={album.tracks}>{album.tracks}</Text>
+            )
+        );
+
+    }
+
+
     render() {
-        console.log(this.state);
+
         return (
             <View>
-                <Text>Album List</Text>
+                {this.renderAlbums()}
             </View>
         );
     }
