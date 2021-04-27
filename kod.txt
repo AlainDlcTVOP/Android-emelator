@@ -1,7 +1,3 @@
-import React, { Component, useState, useEffect } from 'react';
-import { View } from 'react-native';
-import axios from 'axios';
-import AlbumDetail from './AlbumDetail';
 
 // "https://rallycoding.herokuapp.com/api/music_albums"
 // just for testing the key
@@ -27,4 +23,3 @@ class AlbumList extends Component {
         );
     }
 }
-export default AlbumList;
