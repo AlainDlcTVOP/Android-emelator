@@ -8,22 +8,23 @@ class LoginForm extends Component {
 
     onButtonPress() {
         const { email, password } = this.state;
-        // reset to empty object
+
         this.setState({ error: '', loading: true });
 
         firebase.auth().signInWithEmailAndPassword(email, password)
-            .then(this.onLoginSucces.bind(this))
+            .then(this.onLoginSuccess.bind(this))
             .catch(() => {
                 firebase.auth().createUserWithEmailAndPassword(email, password)
-                    .then(this.onLoginSucces.bind(this))
+                    .then(this.onLoginSuccess.bind(this))
                     .catch(this.onLoginFail.bind(this));
             });
     }
 
     onLoginFail() {
-        this.setState({ error: 'Authentication Failed.', loading: false });
+        this.setState({ error: 'Authentication Failed', loading: false });
     }
-    onLoginSucces() {
+
+    onLoginSuccess() {
         this.setState({
             email: '',
             password: '',
@@ -32,23 +33,22 @@ class LoginForm extends Component {
         });
     }
 
-
-
     renderButton() {
         if (this.state.loading) {
-            return <Spiner size={"small"} />
+            return <Spiner size="small" />;
         }
 
         return (
             <Button onPress={this.onButtonPress.bind(this)}>
-                KOM IGEN DÅ
+                Log in
             </Button>
         );
     }
+
     render() {
         return (
             <Card>
-                <CardSection >
+                <CardSection>
                     <Input
                         placeholder="user@gmail.com"
                         label="Email"
@@ -56,25 +56,28 @@ class LoginForm extends Component {
                         onChangeText={email => this.setState({ email })}
                     />
                 </CardSection>
-                <CardSection >
+
+                <CardSection>
                     <Input
                         secureTextEntry
-                        placeholder="password**"
+                        placeholder="password"
                         label="Password"
                         value={this.state.password}
                         onChangeText={password => this.setState({ password })}
                     />
                 </CardSection>
+
                 <Text style={styles.errorTextStyle}>
                     {this.state.error}
                 </Text>
-                <CardSection >
+
+                <CardSection>
                     {this.renderButton()}
                 </CardSection>
             </Card>
         );
     }
-};
+}
 
 const styles = {
     errorTextStyle: {
@@ -83,4 +86,5 @@ const styles = {
         color: 'red'
     }
 };
+
 export default LoginForm;
