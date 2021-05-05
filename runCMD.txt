@@ -1,0 +1,2 @@
+react-native run-android
+\Users\Kungen\Desktop\Andriod-emelator\
