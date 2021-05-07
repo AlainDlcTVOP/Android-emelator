@@ -5,7 +5,8 @@ import ListItem from './ListItem';
 
 class LibraryList extends Component {
     renderItem(library) {
-        return <ListItem library={library} />
+
+        return <ListItem library={library.item} />
     }
     render() {
 
@@ -13,7 +14,7 @@ class LibraryList extends Component {
             <FlatList
                 data={this.props.libraries}
                 renderItem={this.renderItem}
-                keyExtractor={(library) => library.id}
+                keyExtractor={library => library.id}
             />
         );
     }

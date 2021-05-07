@@ -10,8 +10,8 @@ import LibraryList from './components/LibraryList';
 const App = () => {
     return (
         <Provider store={createStore(reducers)}>
-            <View>
-                <Header headerText="TA DIG NU" />
+            <View style={{ flex: 1 }}>
+                <Header headerText="IDA JOHANNA" />
                 <LibraryList />
             </View>
         </Provider>
